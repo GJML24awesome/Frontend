@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calamansi Care — Soil Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- STEP 1 — LOGO / BOOT SCREEN -->
+    <div id="loading-overlay" role="status" aria-label="Starting Calamansi Care">
+        <div class="boot">
+            <div class="boot-logo">
+                <img src="Logo-removebg-preview.png" alt="">
+            </div>
+            <p class="boot-name">Calamansi Care</p>
+            <p class="boot-sub">Soil monitoring for backyard calamansi</p>
+            <div class="boot-track"><div class="boot-fill" id="boot-fill"></div></div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-brand">
+            <div class="header-logo-badge">
+                <img src="Logo-removebg-preview.png" alt="">
+            </div>
+            <div class="header-title-group">
+                <h1>Calamansi Care</h1>
+                <p>Soil monitor</p>
+            </div>
+        </div>
+
+        <div class="system-status-badge" id="system-status" data-state="busy">
+            <span class="status-dot"></span>
+            <span id="header-status">Starting up</span>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <main>
+        <!-- STEP 2 — SENSORS INITIALIZING -->
+        <section id="initializing-screen" class="initializing" aria-live="polite" aria-busy="true">
+            <div class="spinner" aria-hidden="true"></div>
+            <h2>Sensors initializing</h2>
+            <p id="init-step">Connecting to the soil probe</p>
+        </section>
+
+        <!-- STEP 3 — READINGS + ADVISORY -->
+        <div id="dashboard-grid" class="dashboard-grid hidden">
+
+            <!-- Soil pH -->
+            <article class="card" id="ph-card">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="icon-box icon-ph"><i data-lucide="flask-conical"></i></span>
+                        <h2>Soil pH</h2>
+                    </div>
+                    <span class="sensor-status status-optimal" id="ph-status-pill"></span>
+                </div>
+
+                <p class="sensor-value-container">
+                    <span class="sensor-value" id="ph-value">--</span>
+                    <span class="sensor-unit">pH</span>
+                </p>
+                <p class="sensor-delta" id="ph-delta"></p>
+
+                <div class="gauge" id="ph-gauge">
+                    <div class="gauge-track">
+                        <div class="gauge-ideal" id="ph-ideal"></div>
+                        <div class="gauge-marker" id="ph-marker"></div>
+                    </div>
+                    <div class="gauge-scale">
+                        <span id="ph-scale-min"></span>
+                        <span id="ph-scale-ideal"></span>
+                        <span id="ph-scale-max"></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Soil moisture -->
+            <article class="card" id="moisture-card">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="icon-box icon-moisture"><i data-lucide="droplets"></i></span>
+                        <h2>Soil moisture</h2>
+                    </div>
+                    <span class="sensor-status status-optimal" id="moisture-status-pill"></span>
+                </div>
+
+                <p class="sensor-value-container">
+                    <span class="sensor-value" id="moisture-value">--</span>
+                    <span class="sensor-unit">%</span>
+                </p>
+                <p class="sensor-delta" id="moisture-delta"></p>
+
+                <div class="gauge" id="moisture-gauge">
+                    <div class="gauge-track">
+                        <div class="gauge-ideal" id="moisture-ideal"></div>
+                        <div class="gauge-marker" id="moisture-marker"></div>
+                    </div>
+                    <div class="gauge-scale">
+                        <span id="moisture-scale-min"></span>
+                        <span id="moisture-scale-ideal"></span>
+                        <span id="moisture-scale-max"></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Advisory -->
+            <article class="card ai-card">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <span class="icon-box icon-advice"><i data-lucide="sprout"></i></span>
+                        <h2>AI Advisory</h2>
+                    </div>
+                    <span class="timestamp" id="reading-time"></span>
+                </div>
+
+                <ul class="advisory-list" id="advisory-list" aria-live="polite"></ul>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="rescan-btn" type="button">
+                        <i data-lucide="refresh-cw"></i>
+                        <span>Scan again</span>
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
